@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Raidy Demo</title>
+    <script type="application/javascript" src="dist/raidy.min.js"></script>
+</head>
+
+<body>
+
+    <style>
+        html {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        div {
+            margin: 18px 0;
+        }
+        pre {
+            border: 1px solid silver;
+            padding: 12px;
+            white-space: pre-line;
+        }
+    </style>
+
+    <h1>Text Module</h1>
+
+    <hr>
+
+    <div>
+        <h3>String length</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>
+            let input = 'Lorem ipsum';
+            let length = r.len(input);
+        </pre>
+        <span>Output: <strong><script> document.write(r.len('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>lowercase</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>
+            let input = 'Lorem ipsum';
+            let lowCase = r.lowerCase(input);
+        </pre>
+        <span>Output: <strong><script> document.write(r.lowCase('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>UPPERCASE</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let upperCase = r.upCase(input);</pre>
+        <span>Output: <strong><script> document.write(r.upCase('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Title Case</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let titleCase = r.titleCase(input);</pre>
+        <span>Output: <strong><script> document.write(r.titleCase('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>camelCase</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let camelCase = r.camelCase(input);</pre>
+        <span>Output: <strong><script> document.write(r.camelCase('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>kebab-case</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let kebabCase = r.kebabCase(input);</pre>
+        <span>Output: <strong><script> document.write(r.kebabCase('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>lOWERCASE FIRST</h3>
+        <span>Input: <strong>LoREM IPsum</strong></span><br>
+        <pre>let input = 'LoREM IPsum';
+let lowFirst = r.lowFirst(input);</pre>
+        <span>Output: <strong><script> document.write(r.lowFirst('LoREM IPsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>snake_case</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let snakeCase = r.snakeCase(input);</pre>
+        <span>Output: <strong><script> document.write(r.snakeCase('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Ends with</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let endsWith = r.endsWith(input, 'r', 2);</pre>
+        <span>Output: <strong><script> document.write(r.endsWith('Lorem ipsum', 'm', 2)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Escape string</h3>
+        <span>Input: <strong>Lorem & <> ipsum</strong></span><br>
+        <pre>let input = 'Lorem & <> ipsum';
+let escape = r.escape(input);</pre>
+        <span>Output: <strong><script> document.write(r.escape('Lorem & <> ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Reverse string</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let reverse = r.reverse(input);</pre>
+        <span>Output: <strong><script> document.write(r.reverse('Lorem ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Shuffle string</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let shuffle = r.shuffle(input);</pre>
+        <span>Output: <strong><script> document.write(r.shuffle('Lorem ipsum')) </script></strong></span>
+    </div>
+
+</body>
+
+</html>

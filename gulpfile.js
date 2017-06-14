@@ -9,7 +9,7 @@ let rename = require('gulp-rename');
 
 // Concatenate JS files, compile with babel and uglify
 gulp.task('scripts', function() {
-    return gulp.src(['src/*.js'])
+    return gulp.src(['src/**/*.js'])
         .pipe(concat('raidy.js'))
         .pipe(gulp.dest('dist/'))
         .pipe(babel({
@@ -25,7 +25,7 @@ gulp.task('scripts', function() {
 
 // Automatize tasks
 gulp.task('watch', function() {
-    gulp.watch(['src/*.js'], ['scripts']);
+    gulp.watch(['src/**/*.js'], ['scripts']);
 });
 
 // Default task
