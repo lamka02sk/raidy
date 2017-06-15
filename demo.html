@@ -114,11 +114,81 @@ let snakeCase = r.snakeCase(input);</pre>
     <hr>
 
     <div>
+        <h3>Starts with</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let startsWith = r.startsWith(input, 'm', 4);</pre>
+        <span>Output: <strong><script> document.write(r.startsWith('Lorem ipsum', 'm', 4)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
         <h3>Ends with</h3>
         <span>Input: <strong>Lorem ipsum</strong></span><br>
         <pre>let input = 'Lorem ipsum';
-let endsWith = r.endsWith(input, 'r', 2);</pre>
-        <span>Output: <strong><script> document.write(r.endsWith('Lorem ipsum', 'm', 2)) </script></strong></span>
+let endsWith = r.endsWith(input, 'm', 6);</pre>
+        <span>Output: <strong><script> document.write(r.endsWith('Lorem ipsum', 'm', 6)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Repeat string</h3>
+        <span>Input: <strong>Lorem ipsum</strong></span><br>
+        <pre>let input = 'Lorem ipsum';
+let repeat = r.repeat(input, 3, ' + ');</pre>
+        <span>Output: <strong><script> document.write(r.repeat('Lorem ipsum', 3, ' + ')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Split string</h3>
+        <span>Input: <strong>Lorem ipsum dolor sit amet</strong></span><br>
+        <pre>let input = 'Lorem ipsum dolor sit amet';
+let split = r.split(input, ' ', 2);</pre>
+        <span>Output: <strong><script> document.write(r.split('Lorem ipsum dolor sit amet', ' ', 2)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Split to words</h3>
+        <span>Input: <strong>Lorem ipsum dolor & . !? sit amet</strong></span><br>
+        <pre>let input = 'Lorem ipsum dolor & . !? sit amet';
+let words = r.words(input);</pre>
+        <span>Output: <strong><script> document.write(r.words('Lorem ipsum dolor & . !? sit amet')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Replace in string</h3>
+        <span>Input: <strong>Lorem dolor sit</strong></span><br>
+        <pre>let input = 'Lorem dolor sit';
+let replace = r.replace(input, 'dolor', 'ipsum');</pre>
+        <span>Output: <strong><script> document.write(r.replace('Lorem dolor sit', 'dolor', 'ipsum')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Truncate string</h3>
+        <span>Input: <strong>Lorem dolor sit amet</strong></span><br>
+        <pre>let input = 'Lorem dolor sit amet';
+let truncate = r.truncate(input, 12, '...');</pre>
+        <span>Output: <strong><script> document.write(r.truncate('Lorem dolor sit amet', 12, '...')) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Count words</h3>
+        <span>Input: <strong>Lorem ipsum dolor sit amet</strong></span><br>
+        <pre>let input = 'Lorem ipsum dolor sit amet';
+let wordsCount = r.wordsCount(input);</pre>
+        <span>Output: <strong><script> document.write(r.wordsCount('Lorem ipsum dolor sit amet')) </script></strong></span>
     </div>
 
     <hr>
