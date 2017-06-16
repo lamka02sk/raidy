@@ -25,6 +25,20 @@
         }
     </style>
 
+    <h1>Main Module</h1>
+
+    <hr>
+
+    <div>
+        <h3>Length</h3>
+        <span>Input: <strong>['lorem', 'ipsum', 'dolor']</strong></span><br>
+        <pre>
+            let input = ['lorem', 'ipsum', 'dolor'];
+            let length = r.len(input);
+        </pre>
+        <span>Output: <strong><script> document.write(r.len(['lorem', 'ipsum', 'dolor'])) </script></strong></span>
+    </div>
+
     <h1>Text Module</h1>
 
     <hr>
@@ -34,9 +48,9 @@
         <span>Input: <strong>Lorem ipsum</strong></span><br>
         <pre>
             let input = 'Lorem ipsum';
-            let length = r.len(input);
+            let length = r.stringLen(input);
         </pre>
-        <span>Output: <strong><script> document.write(r.len('Lorem ipsum')) </script></strong></span>
+        <span>Output: <strong><script> document.write(r.stringLen('Lorem ipsum')) </script></strong></span>
     </div>
 
     <hr>
@@ -220,6 +234,30 @@ let reverse = r.reverse(input);</pre>
 let shuffle = r.shuffle(input);</pre>
         <span>Output: <strong><script> document.write(r.shuffle('Lorem ipsum')) </script></strong></span>
     </div>
+
+    <hr>
+
+    <h1>Array module</h1>
+
+    <div>
+        <h3>Array length</h3>
+        <span>Input: <strong>[0, 1, 2, 3, 4, 5, 6, 7]</strong></span><br>
+        <pre>let input = [0, 1, 2, 3, 4, 5, 6, 7];
+let length = r.arrayLen(input);</pre>
+        <span>Output: <strong><script> document.write(r.arrayLen([0, 1, 2, 3, 4, 5, 6, 7])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Chunk array</h3>
+        <span>Input: <strong>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</strong></span><br>
+        <pre>let input = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+let chunks = r.chunk(input, 3);</pre>
+        <span>Output: <strong><script> document.write(r.chunk([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 3)) </script></strong></span>
+    </div>
+
+    <hr>
 
 </body>
 

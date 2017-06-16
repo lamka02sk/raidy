@@ -1,3 +1,5 @@
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Main Raidy class
@@ -13,6 +15,38 @@ function R(selector) {
 }
 
 var r = {};
+// Length of array
+r.arrayLen = function (array) {
+    return array.length ? array.length : undefined;
+};
+
+// Chunk array
+r.chunk = function (array, size) {
+    var length = r.arrayLen(array);
+    var chunks = Math.ceil(length / size);
+    var result = [],
+        position = -1,
+        chunk = [];
+    for (var i = 0; i < chunks; ++i) {
+        for (var j = 0; j < size; ++j) {
+            ++position;
+            if (position >= length) break;
+            chunk.push(array[position]);
+            chunk = [];
+        }
+        result.push(chunk);
+    }
+    return result;
+};
+// Get type of the variable
+r.type = function (variable) {
+    return typeof variable === 'undefined' ? 'undefined' : _typeof(variable);
+};
+// Length of string or array
+r.len = function (object) {
+    return r.type(object) === 'string' ? r.stringLen(object) : r.arrayLen(object);
+};
+
 var REGEX_PUNCTUATION = /[^_\W]+/g;
 var REGEX_PUNCTUATION_END = /[_\W]+$/i;
 var REGEX_TITLE_CASE = /\w\S*/g;
@@ -34,7 +68,7 @@ r.toString = function (object) {
 };
 
 // Length of string
-r.len = function (string) {
+r.stringLen = function (string) {
     return r.toString(string).length;
 };
 
@@ -69,8 +103,7 @@ r.kebabCase = function (string) {
 
 // lOW FIRST string
 r.lowFirst = function (string) {
-    string = r.toString(string);
-    return string.charAt(0).toLowerCase() + string.substr(1);
+    return r.toString(string).charAt(0).toLowerCase() + r.toString(string).substr(1);
 };
 
 // snake_case string
@@ -126,7 +159,6 @@ r.split = function (string) {
 r.replace = function (string) {
     var pattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     var replace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
     return r.toString(string).replace(pattern, replace);
 };
 
@@ -134,7 +166,6 @@ r.replace = function (string) {
 r.truncate = function (string) {
     var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 21;
     var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
     return r.toString(string).substr(0, length).replace(REGEX_PUNCTUATION_END, '') + end;
 };
 

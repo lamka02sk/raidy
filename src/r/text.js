@@ -14,57 +14,40 @@ const ENTITY_MAP = {
 };
 
 // Convert object to string
-r.toString = function(object) {
-    return '' + object;
-};
+r.toString = object => '' + object;
 
 // Length of string
-r.len = function(string) {
-    return r.toString(string).length;
-};
+r.stringLen = string => r.toString(string).length;
 
 // Lowercase given string
-r.lowCase = function(string) {
-    return r.toString(string).toLowerCase();
-};
+r.lowCase = string => r.toString(string).toLowerCase();
 
 // Uppercase given string
-r.upCase = function(string) {
-    return r.toString(string).toUpperCase();
-};
+r.upCase = string => r.toString(string).toUpperCase();
 
 // Title Case string
-r.titleCase = function(string) {
-    return r.toString(string).replace(REGEX_TITLE_CASE, function(txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-};
+r.titleCase = string => r.toString(string).replace(
+    REGEX_TITLE_CASE,
+    txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+);
 
 // camelCase string
-r.camelCase = function(string) {
-    return r.toString(string).replace(REGEX_CAMEL_CASE, function(letter, index) {
-        return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
-    }).replace(REGEX_SPACE, '');
-};
+r.camelCase = string => r.toString(string).replace(
+    REGEX_CAMEL_CASE,
+    (letter, index) => index === 0 ? letter.toLowerCase() : letter.toUpperCase()
+).replace(REGEX_SPACE, '');
 
 // kebab-case string
-r.kebabCase = function(string) {
-      return r.lowCase(string).split(' ').join('-');
-};
+r.kebabCase = string => r.lowCase(string).split(' ').join('-');
 
 // lOW FIRST string
-r.lowFirst = function(string) {
-    string = r.toString(string);
-    return string.charAt(0).toLowerCase() + string.substr(1);
-};
+r.lowFirst = string => r.toString(string).charAt(0).toLowerCase() + r.toString(string).substr(1);
 
 // snake_case string
-r.snakeCase = function(string) {
-    return r.lowCase(string).split(' ').join('_');
-};
+r.snakeCase = string => r.lowCase(string).split(' ').join('_');
 
 // Check if string starts with character
-r.startsWith = function(string, character, start = 0) {
+r.startsWith = (string, character, start = 0) => {
     string = r.toString(string);
     character = r.toString(character);
     let length = string.length;
@@ -73,7 +56,7 @@ r.startsWith = function(string, character, start = 0) {
 };
 
 // Check if string ends with character
-r.endsWith = function(string, character, end = 0) {
+r.endsWith = (string, character, end = 0) => {
     string = r.toString(string);
     character = r.toString(character);
     let length = string.length;
@@ -82,7 +65,7 @@ r.endsWith = function(string, character, end = 0) {
 };
 
 // Repeat string
-r.repeat = function(string, number = 2, delimiter = '') {
+r.repeat = (string, number = 2, delimiter = '') => {
     string = r.toString(string);
     let result = string;
     for(let i = 1; i < number; ++i)
@@ -91,7 +74,7 @@ r.repeat = function(string, number = 2, delimiter = '') {
 };
 
 // Split string
-r.split = function(string, delimiter = '', length = -1) {
+r.split = (string, delimiter = '', length = -1) => {
     string = r.toString(string).split(delimiter);
     if(length < -1 || length > string.length || length === -1)
         return string.slice(0);
@@ -99,39 +82,28 @@ r.split = function(string, delimiter = '', length = -1) {
 };
 
 // Replace part of string
-r.replace = function(string, pattern = '', replace = '') {
-    return r.toString(string).replace(pattern, replace);
-};
+r.replace = (string, pattern = '', replace = '') => r.toString(string).replace(pattern, replace);
 
 // Truncate string
-r.truncate = function(string, length = 21, end = '') {
-    return r.toString(string).substr(0, length).replace(REGEX_PUNCTUATION_END, '') + end;
-};
+r.truncate = (string, length = 21, end = '') => r.toString(string).substr(0, length).replace(REGEX_PUNCTUATION_END, '') + end;
 
 // Split string to words
-r.words = function(string) {
-    return r.toString(string).match(REGEX_PUNCTUATION);
-};
+r.words = string => r.toString(string).match(REGEX_PUNCTUATION);
 
 // Count words in string
-r.wordsCount = function(string) {
-    return r.words(string).length
-};
+r.wordsCount = string => r.words(string).length;
 
 // Escape string
-r.escape = function(string) {
-    return r.toString(string).replace(REGEX_ENTITY, function(entity) {
-        return ENTITY_MAP[entity];
-    });
-};
+r.escape = string => r.toString(string).replace(
+    REGEX_ENTITY,
+    entity => ENTITY_MAP[entity]
+);
 
 // Reverse string
-r.reverse = function(string) {
-    return r.toString(string).split('').reverse().join('');
-};
+r.reverse = string => r.toString(string).split('').reverse().join('');
 
 // Shuffle string
-r.shuffle = function(string) {
+r.shuffle = string => {
     let a = r.toString(string).split(''),
         n = a.length - 1;
     for(let i = n; i > 0; --i) {
