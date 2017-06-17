@@ -248,6 +248,79 @@ r.unzip = function (array) {
 r.type = function (variable) {
     return typeof variable === 'undefined' ? 'undefined' : _typeof(variable);
 };
+
+// Check boolean
+r.isBool = function (variable) {
+    return r.type(variable) === 'boolean';
+};
+
+// Check number
+r.isNum = function (variable) {
+    return r.type(variable) === 'number';
+};
+
+// Check string
+r.isString = function (variable) {
+    return r.type(variable) === 'string';
+};
+
+// Check array
+r.isArray = function (variable) {
+    return variable instanceof Array;
+};
+
+// Check array buffer
+r.isArrayBuffer = function (variable) {
+    return variable instanceof ArrayBuffer;
+};
+
+// Check object
+r.isObject = function (variable) {
+    return r.type(variable) === 'object';
+};
+
+// Check buffer
+r.isBuffer = function (variable) {
+    return variable instanceof Buffer;
+};
+
+// Check date
+r.isDate = function (variable) {
+    return variable instanceof Date;
+};
+
+// Check DOM element
+r.isElement = function (variable) {
+    return r.isObject(variable) && variable.nodeType === 1;
+};
+
+// Check error
+r.isError = function (variable) {
+    return variable instanceof Error;
+};
+
+// Check function
+r.isFunction = function (variable) {
+    return r.type(variable) === 'function';
+};
+
+// Check null
+r.isNull = function (variable) {
+    return variable === null;
+};
+
+// Check undefined
+r.isUndefined = function (variable) {
+    return variable === undefined;
+};
+
+// Eval
+r.e = function (content) {
+    return eval(content);
+};
+
+// Noop
+r._ = function () {};
 // Length of string or array
 r.len = function (object) {
     return r.type(object) === 'string' ? r.stringLen(object) : r.arrayLen(object);
