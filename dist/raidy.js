@@ -68,6 +68,126 @@ r.fill = (array, value = '', from = 0, to = r.arrayLen(array)) => {
     }
     return array;
 };
+
+// Return first item
+r.first = array => array[0];
+
+// Pair arrays to object
+r.pair = array => {
+    let result = {};
+    r.loop(array, item => {
+        if(r.arrayLen(item) < 2) return false;
+        result[item[0]] = item[1];
+    });
+    return result;
+};
+
+// Index of item
+r.index = (array, needle, start = 0, end = r.arrayLen(array)) => {
+    if(end > r.arrayLen(array)) end = r.arrayLen(array);
+    return array.slice(start, end).indexOf(needle);
+};
+
+// Intersection
+r.intersect = (primary, secondary) => {
+    if(r.arrayLen(primary) > r.arrayLen(secondary)) return false;
+    let result = [];
+    r.loop(primary, item => {
+        if(r.inArray(item, secondary)) result.push(item);
+    });
+    return result;
+};
+
+// Join
+r.join = (array, delimiter, start = 0, end = r.arrayLen(array)) => array.slice(start, end + 1).join(delimiter);
+
+// Return last item
+r.last = array => array.pop();
+
+// Last index of value
+r.lastIndex = (array, needle, start = 0, end = r.arrayLen(array)) => {
+    if(end > r.arrayLen(array)) end = r.arrayLen(array);
+    return array.slice(start, end).lastIndexOf(needle);
+};
+
+// Pull
+r.pull = (array, items) => {
+    let length = r.arrayLen(array);
+    for(let i = 0; i < length; ++i) {
+        if(r.inArray(array[i], items)) {
+            array.splice(i, 1);
+            --i;
+        }
+    }
+    return array;
+};
+
+// Pull at
+r.pullAt = (array, positions) => {
+    r.loop(positions, item => {
+        array.splice(item, 1);
+        r.loop(positions, (pos, key) => {
+            if(pos > item) --positions[key];
+        });
+    });
+    return array;
+};
+
+// Pop item
+r.pop = (array, position) => {
+    array.splice(position, 1);
+    return array;
+};
+
+// Push item
+r.push = (array, item, position = r.arrayLen(array)) => {
+    array.splice(position, 0, item);
+    return array;
+};
+
+// Reverse array
+r.reverseArray = (array, from = 0) => [].concat(array.slice(0, from), array.slice(from).reverse());
+
+// Slice
+r.slice = (array, start, end = r.arrayLen(array)) => array.slice(start, end);
+
+// Unique array
+r.unique = array => {
+    let result = [];
+    r.loop(array, item => {
+        if(!r.inArray(item, result)) result.push(item);
+    });
+    return result;
+};
+
+// Union arrays
+r.union = (primary, secondary) => r.unique(r.merge(primary, secondary));
+
+// Zip array
+r.zip = (...arrays) => {
+    let zipped = [];
+    let length = r.arrayLen(arrays[0]);
+    for(let i = 0; i < length; ++i) {
+        zipped.push([]);
+        r.loop(arrays, array => {
+            if(array[i] !== undefined) zipped[i].push(array[i]);
+        });
+    }
+    return zipped;
+};
+
+// Unzip array
+r.unzip = array => {
+    let unzipped = [];
+    let length = r.arrayLen(array[0]);
+    for(let i = 0; i < length; ++i) {
+        unzipped.push([]);
+        r.loop(array, item => {
+            if(item[i] !== undefined) unzipped[i].push(item[i]);
+        });
+    }
+    return unzipped;
+};
 // Get type of the variable [any type]
 r.type = variable => typeof variable;
 // Length of string or array

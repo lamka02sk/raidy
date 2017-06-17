@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Raidy Demo</title>
-    <script type="application/javascript" src="dist/raidy.min.js"></script>
+    <script type="application/javascript" src="dist/raidy.js"></script>
 </head>
 
 <body>
@@ -324,6 +324,159 @@ let chunks = r.chunk(input, 3);</pre>
         <span>Input: <strong>['a', 'b', 'c']</strong></span><br>
         <pre>let fill = r.fill(['a', 'b', 'c'], '*', 2, 8);</pre>
         <span>Output: <strong><script> document.write(r.fill(['a', 'b', 'c'], '*', 2, 8)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>First item</h3>
+        <span>Input: <strong>['a', 'b', 'c']</strong></span><br>
+        <pre>let first = r.first(['a', 'b', 'c']);</pre>
+        <span>Output: <strong><script> document.write(r.first(['a', 'b', 'c'])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Pair arrays</h3>
+        <span>Input: <strong>[[0, 1], [5, 6], [4, 3]]</strong></span><br>
+        <pre>let pairs = r.pair([[0, 1], [5, 6], [4, 3]]);</pre>
+        <span>Output: <strong><script> document.write(r.pair([[0, 1], [5, 6], [4, 3]])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Index of item</h3>
+        <span>Input: <strong>['a', 'b', 5, 8, '*']</strong></span><br>
+        <pre>let index = r.index(['a', 'b', 5, 8, '*'], 5, 0, 2);</pre>
+        <span>Output: <strong><script> document.write(r.index(['a', 'b', 5, 8, '*'], 5, 0, 2)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Intersection of 2 arrays</h3>
+        <span>Input: <strong>[0, 1, 2, 3], [1, 4, 2, 8]</strong></span><br>
+        <pre>let intersection = r.intersect([0, 1, 2, 3], [1, 4, 2, 8]);</pre>
+        <span>Output: <strong><script> document.write(r.intersect([0, 1, 2, 3], [1, 4, 2, 8])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Join array to string</h3>
+        <span>Input: <strong>['a', 'b', 'c', 'd', 'e']</strong></span><br>
+        <pre>let string = r.join(['a', 'b', 'c', 'd', 'e'], ' / ', 1, 4);</pre>
+        <span>Output: <strong><script> document.write(r.join(['a', 'b', 'c', 'd', 'e'], ' / ', 1, 4)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Last item</h3>
+        <span>Input: <strong>['a', 'b', 'c', 'd', 'e']</strong></span><br>
+        <pre>let last = r.last(['a', 'b', 'c', 'd', 'e']);</pre>
+        <span>Output: <strong><script> document.write(r.last(['a', 'b', 'c', 'd', 'e'])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Last index of value</h3>
+        <span>Input: <strong>[7, 2, 7, 7, 4]</strong></span><br>
+        <pre>let lastIndex = r.lastIndex([7, 2, 7, 7, 4], 7, 0, 3);</pre>
+        <span>Output: <strong><script> document.write(r.lastIndex([7, 2, 7, 7, 4], 7, 0, 3)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Pull items</h3>
+        <span>Input: <strong>[7, 2, 7, 7, 4]</strong></span><br>
+        <pre>let pull = r.pull([7, 2, 7, 7, 4], [7, 4]);</pre>
+        <span>Output: <strong><script> document.write(r.pull([7, 2, 7, 7, 4], [7, 4])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Pull items at positions</h3>
+        <span>Input: <strong>[7, 2, 7, 7, 4]</strong></span><br>
+        <pre>let pullAt = r.pullAt([7, 2, 7, 7, 4], [2, 4]);</pre>
+        <span>Output: <strong><script> document.write(r.pullAt([7, 2, 7, 7, 4], [2, 4])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Pop item</h3>
+        <span>Input: <strong>[7, 2, 7, 7, 4]</strong></span><br>
+        <pre>let pop = r.pop([7, 2, 7, 7, 4], 3);</pre>
+        <span>Output: <strong><script> document.write(r.pop([7, 2, 7, 7, 4], 3)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Push item</h3>
+        <span>Input: <strong>[7, 2, 7, 7, 4]</strong></span><br>
+        <pre>let push = r.push([7, 2, 7, 7, 4], 3, 1);</pre>
+        <span>Output: <strong><script> document.write(r.push([7, 2, 7, 7, 4], 3, 1)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Reverse (part of) array</h3>
+        <span>Input: <strong>[0, 1, 2, 3, 4, 5]</strong></span><br>
+        <pre>let reverseArray = r.reverseArray([0, 1, 2, 3, 4, 5], 2);</pre>
+        <span>Output: <strong><script> document.write(r.reverseArray([0, 1, 2, 3, 4, 5], 2)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Slice array</h3>
+        <span>Input: <strong>[0, 1, 2, 3, 4, 5]</strong></span><br>
+        <pre>let slice = r.slice([0, 1, 2, 3, 4, 5], 2, 5);</pre>
+        <span>Output: <strong><script> document.write(r.slice([0, 1, 2, 3, 4, 5], 2, 5)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Unique array</h3>
+        <span>Input: <strong>[1, 1, 2, 2, 4, 5]</strong></span><br>
+        <pre>let unique = r.unique([1, 1, 2, 2, 4, 5]);</pre>
+        <span>Output: <strong><script> document.write(r.unique([1, 1, 2, 2, 4, 5])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Union arrays</h3>
+        <span>Input: <strong>[1, 1, 4, 5], [6, 5, 2, 1]</strong></span><br>
+        <pre>let union = r.union([1, 1, 4, 5], [6, 5, 2, 1]);</pre>
+        <span>Output: <strong><script> document.write(r.union([1, 1, 4, 5], [6, 5, 2, 1])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Zip arrays</h3>
+        <span>Input: <strong>[1, 4], [2, 1], [8, 6]</strong></span><br>
+        <pre>let zip = r.zip([1, 4], [2, 1], [8, 6]);</pre>
+        <span>Output: <strong><script> document.write(r.zip([1, 4], [2, 1], [8, 6])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Unzip array</h3>
+        <span>Input: <strong>[[1, 2, 8], [4, 1, 6]]</strong></span><br>
+        <pre>let unzip = r.unzip([[1, 2, 8], [4, 1, 6]]);</pre>
+        <span>Output: <strong><script> document.write(r.unzip([[1, 2, 8], [4, 1, 6]])) </script></strong></span>
     </div>
 
     <hr>

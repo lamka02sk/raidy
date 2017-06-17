@@ -86,6 +86,164 @@ r.fill = function (array) {
     }
     return array;
 };
+
+// Return first item
+r.first = function (array) {
+    return array[0];
+};
+
+// Pair arrays to object
+r.pair = function (array) {
+    var result = {};
+    r.loop(array, function (item) {
+        if (r.arrayLen(item) < 2) return false;
+        result[item[0]] = item[1];
+    });
+    return result;
+};
+
+// Index of item
+r.index = function (array, needle) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : r.arrayLen(array);
+
+    if (end > r.arrayLen(array)) end = r.arrayLen(array);
+    return array.slice(start, end).indexOf(needle);
+};
+
+// Intersection
+r.intersect = function (primary, secondary) {
+    if (r.arrayLen(primary) > r.arrayLen(secondary)) return false;
+    var result = [];
+    r.loop(primary, function (item) {
+        if (r.inArray(item, secondary)) result.push(item);
+    });
+    return result;
+};
+
+// Join
+r.join = function (array, delimiter) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : r.arrayLen(array);
+    return array.slice(start, end + 1).join(delimiter);
+};
+
+// Return last item
+r.last = function (array) {
+    return array.pop();
+};
+
+// Last index of value
+r.lastIndex = function (array, needle) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : r.arrayLen(array);
+
+    if (end > r.arrayLen(array)) end = r.arrayLen(array);
+    return array.slice(start, end).lastIndexOf(needle);
+};
+
+// Pull
+r.pull = function (array, items) {
+    var length = r.arrayLen(array);
+    for (var i = 0; i < length; ++i) {
+        if (r.inArray(array[i], items)) {
+            array.splice(i, 1);
+            --i;
+        }
+    }
+    return array;
+};
+
+// Pull at
+r.pullAt = function (array, positions) {
+    r.loop(positions, function (item) {
+        array.splice(item, 1);
+        r.loop(positions, function (pos, key) {
+            if (pos > item) --positions[key];
+        });
+    });
+    return array;
+};
+
+// Pop item
+r.pop = function (array, position) {
+    array.splice(position, 1);
+    return array;
+};
+
+// Push item
+r.push = function (array, item) {
+    var position = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : r.arrayLen(array);
+
+    array.splice(position, 0, item);
+    return array;
+};
+
+// Reverse array
+r.reverseArray = function (array) {
+    var from = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    return [].concat(array.slice(0, from), array.slice(from).reverse());
+};
+
+// Slice
+r.slice = function (array, start) {
+    var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : r.arrayLen(array);
+    return array.slice(start, end);
+};
+
+// Unique array
+r.unique = function (array) {
+    var result = [];
+    r.loop(array, function (item) {
+        if (!r.inArray(item, result)) result.push(item);
+    });
+    return result;
+};
+
+// Union arrays
+r.union = function (primary, secondary) {
+    return r.unique(r.merge(primary, secondary));
+};
+
+// Zip array
+r.zip = function () {
+    for (var _len2 = arguments.length, arrays = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        arrays[_key2] = arguments[_key2];
+    }
+
+    var zipped = [];
+    var length = r.arrayLen(arrays[0]);
+
+    var _loop = function _loop(i) {
+        zipped.push([]);
+        r.loop(arrays, function (array) {
+            if (array[i] !== undefined) zipped[i].push(array[i]);
+        });
+    };
+
+    for (var i = 0; i < length; ++i) {
+        _loop(i);
+    }
+    return zipped;
+};
+
+// Unzip array
+r.unzip = function (array) {
+    var unzipped = [];
+    var length = r.arrayLen(array[0]);
+
+    var _loop2 = function _loop2(i) {
+        unzipped.push([]);
+        r.loop(array, function (item) {
+            if (item[i] !== undefined) unzipped[i].push(item[i]);
+        });
+    };
+
+    for (var i = 0; i < length; ++i) {
+        _loop2(i);
+    }
+    return unzipped;
+};
 // Get type of the variable [any type]
 r.type = function (variable) {
     return typeof variable === 'undefined' ? 'undefined' : _typeof(variable);
