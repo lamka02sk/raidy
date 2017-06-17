@@ -32,19 +32,72 @@ r.chunk = function (array, size) {
             ++position;
             if (position >= length) break;
             chunk.push(array[position]);
-            chunk = [];
         }
         result.push(chunk);
+        chunk = [];
     }
     return result;
 };
-// Get type of the variable
+
+// Merge arrays
+r.merge = function () {
+    for (var _len = arguments.length, arrays = Array(_len), _key = 0; _key < _len; _key++) {
+        arrays[_key] = arguments[_key];
+    }
+
+    var length = r.arrayLen(arrays);
+    for (var i = 1; i < length; ++i) {
+        var arrayLength = r.arrayLen(arrays[i]);
+        for (var j = 0; j < arrayLength; ++j) {
+            arrays[0].push(arrays[i][j]);
+        }
+    }
+    return arrays[0];
+};
+
+// Check for item in array
+r.inArray = function (needle, array) {
+    return array.indexOf(needle) !== -1;
+};
+
+// Show array differences
+r.diff = function (primary, secondary) {
+    if (r.arrayLen(primary) > r.arrayLen(secondary)) return false;
+    var diff = [];
+    r.loop(primary, function (value, key) {
+        if (value !== secondary[key]) diff.push(key);
+    });
+    return diff;
+};
+
+// Drop x last items
+r.drop = function (array, number) {
+    return array.splice(0, r.arrayLen(array) - number);
+};
+
+// Fill array
+r.fill = function (array) {
+    var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    var from = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var to = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : r.arrayLen(array);
+
+    for (var i = from; i < to; ++i) {
+        if (r.arrayLen(array) < i) array.push(value);else array[i] = value;
+    }
+    return array;
+};
+// Get type of the variable [any type]
 r.type = function (variable) {
     return typeof variable === 'undefined' ? 'undefined' : _typeof(variable);
 };
 // Length of string or array
 r.len = function (object) {
     return r.type(object) === 'string' ? r.stringLen(object) : r.arrayLen(object);
+};
+
+// For each
+r.loop = function (array, callback) {
+    array.forEach(callback);
 };
 
 var REGEX_PUNCTUATION = /[^_\W]+/g;

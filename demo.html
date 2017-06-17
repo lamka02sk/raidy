@@ -39,6 +39,30 @@
         <span>Output: <strong><script> document.write(r.len(['lorem', 'ipsum', 'dolor'])) </script></strong></span>
     </div>
 
+    <hr>
+
+    <div>
+        <h3>Loop</h3>
+        <span>Input: <strong>['lorem', 'ipsum', 'dolor']</strong></span><br>
+        <pre>
+            let input = ['lorem', 'ipsum', 'dolor'];
+            r.loop(input, (item) => {
+                console.log(item);
+            });
+        </pre>
+        <span>Output:
+            <strong>
+                <script>
+                r.loop(['lorem', 'ipsum', 'dolor'], (item) => {
+                    document.write(item + ' ');
+                });
+                </script>
+            </strong>
+        </span>
+    </div>
+
+    <hr>
+
     <h1>Text Module</h1>
 
     <hr>
@@ -255,6 +279,51 @@ let length = r.arrayLen(input);</pre>
         <pre>let input = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let chunks = r.chunk(input, 3);</pre>
         <span>Output: <strong><script> document.write(r.chunk([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 3)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Merge arrays</h3>
+        <span>Input: <strong>[0, 1, 2], [1, 5, 8], [9, 6, 5, 7]</strong></span><br>
+        <pre>let merge = r.merge([0, 1, 2], [1, 5, 8], [9, 6, 5, 7]);</pre>
+        <span>Output: <strong><script> document.write(r.merge([0, 1, 2], [1, 5, 8], [9, 6, 5, 7])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>inArray</h3>
+        <span>Input: <strong>['lorem', 'ipsum', 'dolor']</strong></span><br>
+        <pre>let inArray = r.inArray('ipsum', ['lorem', 'ipsum', 'dolor']);</pre>
+        <span>Output: <strong><script> document.write(r.inArray('ipsum', ['lorem', 'ipsum', 'dolor'])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Differences</h3>
+        <span>Input: <strong>['lorem', 'ipsum', 'sit'], ['loremmm', 'ipsum', 'dolor']</strong></span><br>
+        <pre>let diff = r.diff(['lorem', 'ipsum', 'sit'], ['loremmm', 'ipsum', 'dolor']);</pre>
+        <span>Output: <strong><script> document.write(r.diff(['lorem', 'ipsum', 'sit'], ['loremmm', 'ipsum', 'dolor'])) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Drop x last items</h3>
+        <span>Input: <strong>[5, 8, 4, 3, 0, 1]</strong></span><br>
+        <pre>let drop = r.drop([5, 8, 4, 3, 0, 1], 2);</pre>
+        <span>Output: <strong><script> document.write(r.drop([5, 8, 4, 3, 0, 1], 2)) </script></strong></span>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Fill array</h3>
+        <span>Input: <strong>['a', 'b', 'c']</strong></span><br>
+        <pre>let fill = r.fill(['a', 'b', 'c'], '*', 2, 8);</pre>
+        <span>Output: <strong><script> document.write(r.fill(['a', 'b', 'c'], '*', 2, 8)) </script></strong></span>
     </div>
 
     <hr>
