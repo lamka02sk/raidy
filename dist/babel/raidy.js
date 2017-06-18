@@ -330,7 +330,105 @@ r.len = function (object) {
 r.loop = function (array, callback) {
     array.forEach(callback);
 };
+// Add
+r.add = function () {
+    for (var _len3 = arguments.length, numbers = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        numbers[_key3] = arguments[_key3];
+    }
 
+    return numbers.reduce(function (result, value) {
+        return +result + value;
+    }, 0);
+};
+
+// Subtract
+r.sub = function () {
+    for (var _len4 = arguments.length, numbers = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        numbers[_key4] = arguments[_key4];
+    }
+
+    return numbers.reduce(function (result, value) {
+        return +result - value;
+    }, numbers.splice(0, 1));
+};
+
+// Multiply
+r.mul = function () {
+    for (var _len5 = arguments.length, numbers = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        numbers[_key5] = arguments[_key5];
+    }
+
+    return numbers.reduce(function (result, value) {
+        return +result * value;
+    }, numbers.splice(0, 1));
+};
+
+// Divide
+r.div = function () {
+    for (var _len6 = arguments.length, numbers = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        numbers[_key6] = arguments[_key6];
+    }
+
+    return numbers.reduce(function (result, value) {
+        return +result / value;
+    }, numbers.splice(0, 1));
+};
+
+// Ceil
+r.ceil = function (number) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var precomputed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    precision = !precomputed ? Math.pow(10, +precision) : precision;
+    return Math.ceil(+number * precision) / precision;
+};
+
+// Ceil more numbers
+r.ceilArray = function (numbers) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+    precision = Math.pow(10, +precision);
+    r.loop(numbers, function (number, index) {
+        return numbers[index] = r.ceil(number, precision, true);
+    });
+    return numbers;
+};
+
+// Floor
+r.floor = function (number) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var precomputed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    precision = !precomputed ? Math.pow(10, +precision) : precision;
+    return Math.floor(+number * precision) / precision;
+};
+
+// Floor more numbers
+r.floorArray = function (numbers) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+    precision = Math.pow(10, +precision);
+    r.loop(numbers, function (number, index) {
+        return numbers[index] = r.floor(number, precision, true);
+    });
+    return numbers;
+};
+
+// Round
+
+// Round more numbers
+
+// Range
+
+// In range
+
+// Clamp
+
+// Average
+
+// Min
+
+// Max
 var REGEX_PUNCTUATION = /[^_\W]+/g;
 var REGEX_PUNCTUATION_END = /[_\W]+$/i;
 var REGEX_TITLE_CASE = /\w\S*/g;
