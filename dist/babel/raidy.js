@@ -374,13 +374,33 @@ r.div = function () {
     }, numbers.splice(0, 1));
 };
 
+// Round
+r.round = function (number) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var precomputed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var mode = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'round';
+
+    precision = !precomputed ? Math.pow(10, +precision) : precision;
+    return Math[mode](+number * precision) / precision;
+};
+
+// Round more numbers
+r.roundArray = function (numbers) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var mode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'round';
+
+    precision = Math.pow(10, +precision);
+    r.loop(numbers, function (number, index) {
+        return numbers[index] = r.round(number, precision, true, mode);
+    });
+    return numbers;
+};
+
 // Ceil
 r.ceil = function (number) {
     var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var precomputed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-    precision = !precomputed ? Math.pow(10, +precision) : precision;
-    return Math.ceil(+number * precision) / precision;
+    return r.round(number, precision, precomputed, 'ceil');
 };
 
 // Ceil more numbers
@@ -389,7 +409,7 @@ r.ceilArray = function (numbers) {
 
     precision = Math.pow(10, +precision);
     r.loop(numbers, function (number, index) {
-        return numbers[index] = r.ceil(number, precision, true);
+        return numbers[index] = r.round(number, precision, true, 'ceil');
     });
     return numbers;
 };
@@ -398,9 +418,7 @@ r.ceilArray = function (numbers) {
 r.floor = function (number) {
     var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var precomputed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-    precision = !precomputed ? Math.pow(10, +precision) : precision;
-    return Math.floor(+number * precision) / precision;
+    return r.round(number, precision, precomputed, 'floor');
 };
 
 // Floor more numbers
@@ -409,26 +427,147 @@ r.floorArray = function (numbers) {
 
     precision = Math.pow(10, +precision);
     r.loop(numbers, function (number, index) {
-        return numbers[index] = r.floor(number, precision, true);
+        return numbers[index] = r.round(number, precision, true, 'floor');
     });
     return numbers;
 };
 
-// Round
-
-// Round more numbers
-
 // Range
+r.range = regeneratorRuntime.mark(function _callee(min, max) {
+    var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+    var i;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    i = min * 1000000;
+
+                case 1:
+                    if (!(i <= max * 1000000)) {
+                        _context.next = 7;
+                        break;
+                    }
+
+                    _context.next = 4;
+                    return i / 1000000;
+
+                case 4:
+                    i += step * 1000000;
+                    _context.next = 1;
+                    break;
+
+                case 7:
+                case 'end':
+                    return _context.stop();
+            }
+        }
+    }, _callee, this);
+});
+
+// Range with array
+r.rangeArray = function (min, max) {
+    var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+
+    var result = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = r.range(min, max, step)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var number = _step.value;
+
+            result.push(number);
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    return result;
+};
 
 // In range
+r.inRange = function (number, min, max) {
+    var step = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+
+    var range = r.rangeArray(min, max, step);
+    return r.inArray(number, range);
+};
 
 // Clamp
+r.clamp = function (number) {
+    var min = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var max = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+
+    if (number > max) return max;
+    if (number < min) return min;
+    return number;
+};
+
+// Average array
+r.averageArray = function (array) {
+    var length = r.arrayLen(array),
+        count = 0;
+    for (var i = 0; i < length; ++i) {
+        count += +array[i];
+    }return count / length;
+};
 
 // Average
+r.average = function () {
+    for (var _len7 = arguments.length, numbers = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        numbers[_key7] = arguments[_key7];
+    }
+
+    return r.averageArray(numbers);
+};
+
+// Min array
+r.minArray = function (array) {
+    return array.reduce(function (a, b) {
+        return Math.min(a, b);
+    });
+};
 
 // Min
+r.min = function () {
+    return Math.min.apply(Math, arguments);
+};
+
+// Max array
+r.maxArray = function (array) {
+    return array.reduce(function (a, b) {
+        return Math.max(a, b);
+    });
+};
 
 // Max
+r.max = function () {
+    return Math.max.apply(Math, arguments);
+};
+
+// Random
+r.rand = function (min, max) {
+    var count = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+    var precision = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+    if (count === 1) return r.round(Math.random() * (max - min) + min, precision, false);
+    var result = [];
+    for (var i = 0; i < count; ++i) {
+        result.push(r.rand(min, max, 1, precision));
+    }return result;
+};
 var REGEX_PUNCTUATION = /[^_\W]+/g;
 var REGEX_PUNCTUATION_END = /[_\W]+$/i;
 var REGEX_TITLE_CASE = /\w\S*/g;
