@@ -319,6 +319,33 @@ r.e = function (content) {
     return eval(content);
 };
 
+// Delay
+r.delay = function (callback, delay) {
+    for (var _len3 = arguments.length, parameters = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
+        parameters[_key3 - 2] = arguments[_key3];
+    }
+
+    return setTimeout(function () {
+        callback.apply(undefined, parameters);
+    }, delay);
+};
+
+// Timer
+r.timer = function (callback, time) {
+    for (var _len4 = arguments.length, parameters = Array(_len4 > 3 ? _len4 - 3 : 0), _key4 = 3; _key4 < _len4; _key4++) {
+        parameters[_key4 - 3] = arguments[_key4];
+    }
+
+    var count = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+
+    var i = 1;
+    var timer = setInterval(function () {
+        if (count !== -1 && i >= count) clearInterval(timer);
+        callback.apply(undefined, parameters);
+        ++i;
+    }, time);
+};
+
 // Noop
 r._ = function () {};
 // Length of string or array
@@ -332,8 +359,8 @@ r.loop = function (array, callback) {
 };
 // Add
 r.add = function () {
-    for (var _len3 = arguments.length, numbers = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        numbers[_key3] = arguments[_key3];
+    for (var _len5 = arguments.length, numbers = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        numbers[_key5] = arguments[_key5];
     }
 
     return numbers.reduce(function (result, value) {
@@ -343,8 +370,8 @@ r.add = function () {
 
 // Subtract
 r.sub = function () {
-    for (var _len4 = arguments.length, numbers = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        numbers[_key4] = arguments[_key4];
+    for (var _len6 = arguments.length, numbers = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        numbers[_key6] = arguments[_key6];
     }
 
     return numbers.reduce(function (result, value) {
@@ -354,8 +381,8 @@ r.sub = function () {
 
 // Multiply
 r.mul = function () {
-    for (var _len5 = arguments.length, numbers = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        numbers[_key5] = arguments[_key5];
+    for (var _len7 = arguments.length, numbers = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        numbers[_key7] = arguments[_key7];
     }
 
     return numbers.reduce(function (result, value) {
@@ -365,8 +392,8 @@ r.mul = function () {
 
 // Divide
 r.div = function () {
-    for (var _len6 = arguments.length, numbers = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        numbers[_key6] = arguments[_key6];
+    for (var _len8 = arguments.length, numbers = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        numbers[_key8] = arguments[_key8];
     }
 
     return numbers.reduce(function (result, value) {
@@ -526,8 +553,8 @@ r.averageArray = function (array) {
 
 // Average
 r.average = function () {
-    for (var _len7 = arguments.length, numbers = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        numbers[_key7] = arguments[_key7];
+    for (var _len9 = arguments.length, numbers = Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        numbers[_key9] = arguments[_key9];
     }
 
     return r.averageArray(numbers);

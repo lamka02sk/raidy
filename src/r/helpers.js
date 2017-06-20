@@ -43,5 +43,20 @@ r.isUndefined = variable => (variable === undefined);
 // Eval
 r.e = content => eval(content);
 
+// Delay
+r.delay = (callback, delay, ...parameters) => setTimeout(() => {
+    callback(...parameters);
+}, delay);
+
+// Timer
+r.timer = (callback, time, count = -1, ...parameters) => {
+    let i = 1;
+    let timer = setInterval(() => {
+        if(count !== -1 && i >= count) clearInterval(timer);
+        callback(...parameters);
+        ++i;
+    }, time);
+};
+
 // Noop
 r._ = () => {};
