@@ -2,7 +2,9 @@
 class Raidy {
 
     constructor(selector) {
-        this.object = document.querySelectorAll(selector);
+        if(!r.isObject(selector)) selector = document.querySelectorAll(selector);
+        else selector = [selector];
+        this.object = selector;
         this.length = Object.keys(this.object).length;
         this.prepare();
         return this;
@@ -10,6 +12,7 @@ class Raidy {
 
     prepare() {
         new Attributes(this);
+        new Events(this);
     }
 
 }
