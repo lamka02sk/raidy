@@ -41,7 +41,6 @@ class Events {
             r.loop(parent.object, element => {
                 r.loop(element.listeners, listener => {
                     if(listener.event !== event) return false;
-                    result.push(listener.callback);
                     element.removeEventListener(event, listener.callback);
                 });
             });
