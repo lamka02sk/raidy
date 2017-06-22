@@ -1,16 +1,16 @@
-# `r.type(variable)`
+## `r.type(variable)`
 Returns type of the given variable as string.
 
-#### Parameters
+### Parameters
 `variable` **(object)**: The variable to return type of.
 
-#### Returns
+### Returns
 **(string)**: Type of the given variable as string.
 
-#### Since
+### Since
 1.0
 
-#### Examples
+### Examples
 ```javascript
 let num = 2;
 let type = r.type(num);

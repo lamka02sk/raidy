@@ -1,16 +1,16 @@
-# `r.len(object)`
+## `r.len(object)`
 Return length of variable (string or array) as number.
 
-#### Parameters
+### Parameters
 `object` **(string | array)**: The array to calculate length of.
 
-#### Returns
+### Returns
 **(number)**: The length of given object.
 
-#### Since
+### Since
 1.0
 
-#### Examples
+### Examples
 ```javascript
 let array = [0, 5, 78, 'test'];
 let length = r.len(array);

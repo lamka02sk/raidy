@@ -1,17 +1,17 @@
-# `r.loop(array, callback)`
+## `r.loop(array, callback)`
 Loops through the given array and executes given callback.
 
-#### Parameters
+### Parameters
 `array` **(array)**: The array to loop through.
 `callback` **(function)**: Function executed for each item in array.
 
-#### Returns
+### Returns
 **(undefined)**: This method does not return any value.
 
-#### Since
+### Since
 1.0
 
-#### Examples
+### Examples
 ```javascript
 let array = ['string', null];
 r.loop(array, (value, key) => console.log(key + ': ' + value));
