@@ -1,11 +1,29 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Main Raidy class
-var Raidy = function Raidy(selector) {
-    _classCallCheck(this, Raidy);
-};
+var Raidy = function () {
+    function Raidy(selector) {
+        _classCallCheck(this, Raidy);
+
+        this.object = document.querySelectorAll(selector);
+        this.length = Object.keys(this.object).length;
+        this.prepare();
+        return this;
+    }
+
+    _createClass(Raidy, [{
+        key: 'prepare',
+        value: function prepare() {
+            new Attributes(this);
+        }
+    }]);
+
+    return Raidy;
+}();
 
 // Main Raidy functions
 
@@ -15,7 +33,256 @@ function R(selector) {
 }
 
 var r = {};
+
+var Attributes = function () {
+    function Attributes(parent) {
+        _classCallCheck(this, Attributes);
+
+        this.parent = parent;
+        this.classList();
+        this.attributes();
+        this.dataset();
+        this.properties();
+    }
+
+    _createClass(Attributes, [{
+        key: 'classList',
+        value: function classList() {
+
+            var parent = this.parent;
+
+            // Add class
+            parent.addClass = function () {
+                for (var _len = arguments.length, classes = Array(_len), _key = 0; _key < _len; _key++) {
+                    classes[_key] = arguments[_key];
+                }
+
+                r.loop(parent.object, function (element) {
+                    return r.loop(classes, function (c) {
+                        return element.classList.add(c);
+                    });
+                });
+                return parent;
+            };
+
+            // Remove class
+            parent.removeClass = function () {
+                for (var _len2 = arguments.length, classes = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                    classes[_key2] = arguments[_key2];
+                }
+
+                if (classes === undefined || classes === []) {
+                    r.loop(parent.object, function (element) {
+                        return element.classList = [];
+                    });
+                    return parent;
+                }
+
+                r.loop(parent.object, function (element) {
+                    return r.loop(classes, function (c) {
+                        return element.classList.remove(c);
+                    });
+                });
+                return parent;
+            };
+
+            // Has class
+            parent.hasClass = function () {
+                for (var _len3 = arguments.length, classes = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+                    classes[_key3] = arguments[_key3];
+                }
+
+                var result = [];
+                r.loop(parent.object, function (element, index) {
+                    result.push([]);
+                    r.loop(classes, function (c) {
+                        return result[index].push(element.classList.contains(c));
+                    });
+                });
+                return result;
+            };
+
+            // Toggle class
+            parent.toggleClass = function () {
+                for (var _len4 = arguments.length, classes = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+                    classes[_key4] = arguments[_key4];
+                }
+
+                r.loop(parent.object, function (element) {
+                    return r.loop(classes, function (c) {
+                        return element.classList.toggle(c);
+                    });
+                });
+                return parent;
+            };
+
+            // Get class list
+            parent.classList = function () {
+                var result = [];
+                r.loop(parent.object, function (element) {
+                    return result.push(element.classList);
+                });
+                return result;
+            };
+        }
+    }, {
+        key: 'attributes',
+        value: function attributes() {
+            var _this = this;
+
+            var parent = this.parent;
+
+            // Set / Get attribute
+            parent.attr = function (name) {
+                var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+
+                if (value === undefined) {
+                    var result = [];
+                    r.loop(parent.object, function (element) {
+                        return result.push(element.getAttribute(name));
+                    });
+                    return result;
+                }
+
+                r.loop(parent.object, function (element) {
+                    return element.setAttribute(name, value);
+                });
+                return parent;
+            };
+
+            // Set attributes
+            parent.setAttr = function () {
+                for (var _len5 = arguments.length, attributes = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+                    attributes[_key5] = arguments[_key5];
+                }
+
+                r.loop(attributes, function (attribute) {
+                    if (r.arrayLen(attribute !== 2)) return false;
+                    r.loop(parent.object, function (element) {
+                        return element.setAttribute(attribute[0], attribute[1]);
+                    });
+                });
+                return _this;
+            };
+
+            // Remove attributes
+            parent.removeAttr = function () {
+                for (var _len6 = arguments.length, attributes = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+                    attributes[_key6] = arguments[_key6];
+                }
+
+                r.loop(attributes, function (attribute) {
+                    return r.loop(parent.object, function (element) {
+                        return element.removeAttribute(attribute);
+                    });
+                });
+                return _this;
+            };
+        }
+    }, {
+        key: 'dataset',
+        value: function dataset() {
+            var _this2 = this;
+
+            var parent = this.parent;
+
+            // Set / Get data attribute
+            parent.data = function (name) {
+                var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+                return parent.attr('data' + name, value);
+            };
+
+            // Set data attributes
+            parent.setData = function () {
+                for (var _len7 = arguments.length, attributes = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+                    attributes[_key7] = arguments[_key7];
+                }
+
+                r.loop(attributes, function (attribute) {
+                    if (r.arrayLen(attribute !== 2)) return false;
+                    r.loop(parent.object, function (element) {
+                        return element.setAttribute('data-' + attribute[0], attribute[1]);
+                    });
+                });
+                return _this2;
+            };
+
+            // Remove data attributes
+            parent.removeData = function () {
+                for (var _len8 = arguments.length, attributes = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+                    attributes[_key8] = arguments[_key8];
+                }
+
+                r.loop(attributes, function (attribute) {
+                    return r.loop(parent.object, function (element) {
+                        return element.removeAttribute('data-' + attribute);
+                    });
+                });
+                return _this2;
+            };
+        }
+    }, {
+        key: 'properties',
+        value: function properties() {
+            var _this3 = this;
+
+            var parent = this.parent;
+
+            // Set / Get property
+            parent.prop = function (name) {
+                var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+
+                if (value === undefined) {
+                    var result = [];
+                    r.loop(parent.object, function (element) {
+                        if (name in element) result.push(element[name]);else result.push(undefined);
+                    });
+                    return result;
+                }
+
+                r.loop(parent.object, function (element) {
+                    return element[name] = value;
+                });
+                return parent;
+            };
+
+            // Set properties
+            parent.setProp = function () {
+                for (var _len9 = arguments.length, properties = Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+                    properties[_key9] = arguments[_key9];
+                }
+
+                r.loop(properties, function (property) {
+                    if (r.arrayLen(property !== 2)) return false;
+                    r.loop(parent.object, function (element) {
+                        return element[property[0]] = property[1];
+                    });
+                });
+                return _this3;
+            };
+
+            // Remove properties
+            parent.removeProp = function () {
+                for (var _len10 = arguments.length, properties = Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+                    properties[_key10] = arguments[_key10];
+                }
+
+                r.loop(properties, function (property) {
+                    return r.loop(parent.object, function (element) {
+                        return delete element[property];
+                    });
+                });
+                return _this3;
+            };
+        }
+    }]);
+
+    return Attributes;
+}();
+
 // Length of array
+
+
 r.arrayLen = function (array) {
     return array.length ? array.length : undefined;
 };
@@ -41,8 +308,8 @@ r.chunk = function (array, size) {
 
 // Merge arrays
 r.merge = function () {
-    for (var _len = arguments.length, arrays = Array(_len), _key = 0; _key < _len; _key++) {
-        arrays[_key] = arguments[_key];
+    for (var _len11 = arguments.length, arrays = Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        arrays[_key11] = arguments[_key11];
     }
 
     var length = r.arrayLen(arrays);
@@ -207,8 +474,8 @@ r.union = function (primary, secondary) {
 
 // Zip array
 r.zip = function () {
-    for (var _len2 = arguments.length, arrays = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        arrays[_key2] = arguments[_key2];
+    for (var _len12 = arguments.length, arrays = Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        arrays[_key12] = arguments[_key12];
     }
 
     var zipped = [];
@@ -321,8 +588,8 @@ r.e = function (content) {
 
 // Delay
 r.delay = function (callback, delay) {
-    for (var _len3 = arguments.length, parameters = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
-        parameters[_key3 - 2] = arguments[_key3];
+    for (var _len13 = arguments.length, parameters = Array(_len13 > 2 ? _len13 - 2 : 0), _key13 = 2; _key13 < _len13; _key13++) {
+        parameters[_key13 - 2] = arguments[_key13];
     }
 
     return setTimeout(function () {
@@ -332,8 +599,8 @@ r.delay = function (callback, delay) {
 
 // Timer
 r.timer = function (callback, time) {
-    for (var _len4 = arguments.length, parameters = Array(_len4 > 3 ? _len4 - 3 : 0), _key4 = 3; _key4 < _len4; _key4++) {
-        parameters[_key4 - 3] = arguments[_key4];
+    for (var _len14 = arguments.length, parameters = Array(_len14 > 3 ? _len14 - 3 : 0), _key14 = 3; _key14 < _len14; _key14++) {
+        parameters[_key14 - 3] = arguments[_key14];
     }
 
     var count = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
@@ -359,8 +626,8 @@ r.loop = function (array, callback) {
 };
 // Add
 r.add = function () {
-    for (var _len5 = arguments.length, numbers = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        numbers[_key5] = arguments[_key5];
+    for (var _len15 = arguments.length, numbers = Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        numbers[_key15] = arguments[_key15];
     }
 
     return numbers.reduce(function (result, value) {
@@ -370,8 +637,8 @@ r.add = function () {
 
 // Subtract
 r.sub = function () {
-    for (var _len6 = arguments.length, numbers = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        numbers[_key6] = arguments[_key6];
+    for (var _len16 = arguments.length, numbers = Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        numbers[_key16] = arguments[_key16];
     }
 
     return numbers.reduce(function (result, value) {
@@ -381,8 +648,8 @@ r.sub = function () {
 
 // Multiply
 r.mul = function () {
-    for (var _len7 = arguments.length, numbers = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        numbers[_key7] = arguments[_key7];
+    for (var _len17 = arguments.length, numbers = Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+        numbers[_key17] = arguments[_key17];
     }
 
     return numbers.reduce(function (result, value) {
@@ -392,8 +659,8 @@ r.mul = function () {
 
 // Divide
 r.div = function () {
-    for (var _len8 = arguments.length, numbers = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        numbers[_key8] = arguments[_key8];
+    for (var _len18 = arguments.length, numbers = Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+        numbers[_key18] = arguments[_key18];
     }
 
     return numbers.reduce(function (result, value) {
@@ -553,8 +820,8 @@ r.averageArray = function (array) {
 
 // Average
 r.average = function () {
-    for (var _len9 = arguments.length, numbers = Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        numbers[_key9] = arguments[_key9];
+    for (var _len19 = arguments.length, numbers = Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        numbers[_key19] = arguments[_key19];
     }
 
     return r.averageArray(numbers);

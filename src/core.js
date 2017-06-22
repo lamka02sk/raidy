@@ -2,7 +2,14 @@
 class Raidy {
 
     constructor(selector) {
+        this.object = document.querySelectorAll(selector);
+        this.length = Object.keys(this.object).length;
+        this.prepare();
+        return this;
+    }
 
+    prepare() {
+        new Attributes(this);
     }
 
 }
